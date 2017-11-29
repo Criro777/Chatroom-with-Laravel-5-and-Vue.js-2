@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageSent;
 use App\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +41,8 @@ class MessageController extends Controller
         $message = $user->messages()->create([
             'message' => $request->get('message')
         ]);
+
+        broadcast(new MessageSent($message, $user))->toOthers();
 
         return ['status' => 'OK'];
     }
