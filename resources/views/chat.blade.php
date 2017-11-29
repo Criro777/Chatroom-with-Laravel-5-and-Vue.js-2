@@ -6,7 +6,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Chatroom <span class="badge pull-right"></span>
+                        Chatroom <span class="badge pull-right">@{{ usersInRoom.length }}</span>
                     </div>
                     <message-container :messages="messages"></message-container>
                     <message-send @messagesent="addMessage"></message-send>
