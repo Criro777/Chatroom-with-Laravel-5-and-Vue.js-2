@@ -24,22 +24,23 @@ const app = new Vue({
     el: '#app',
 
     data: {
-        messages: [
-            {
-                message: 'Привет!',
-                user: "Мистер Х"
-            },
-            {
-                message: 'Привет ещё раз!',
-                user: "Мистер Y"
-            }
-        ]
+        messages: []
     },
     methods: {
         addMessage(message) {
             // Add to existing messages
             this.messages.push(message);
-            // Persist to the database etc
+            // Persist to the database
+            axios.post('/messages', message).then(response => {
+                console.log(response);
+                // Do whatever;
+            })
         }
+    },
+
+    created() {
+        axios.get('/messages').then(response => {
+            this.messages = response.data;
+        })
     }
 });
