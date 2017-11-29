@@ -16,7 +16,30 @@ window.Vue = require('vue');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('message', require('./components/Message.vue'));
+Vue.component('message-container', require('./components/MessageContainer.vue'));
+Vue.component('message-send', require('./components/MessageSend.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+
+    data: {
+        messages: [
+            {
+                message: 'Привет!',
+                user: "Мистер Х"
+            },
+            {
+                message: 'Привет ещё раз!',
+                user: "Мистер Y"
+            }
+        ]
+    },
+    methods: {
+        addMessage(message) {
+            // Add to existing messages
+            this.messages.push(message);
+            // Persist to the database etc
+        }
+    }
 });
