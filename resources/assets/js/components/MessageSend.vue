@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="chat-composer">
-        <input type="text" placeholder="Start typing your message..." v-model="messageText" @keyup.enter="sendMessage">
-        <button class="btn btn-primary" @click="sendMessage">Send</button>
+        <input type="text" placeholder="Введите сообщение..." v-model="messageText" @keyup.enter="sendMessage">
+        <button class="btn btn-primary" @click="sendMessage">Отправить</button>
     </div>
 </template>
 
@@ -16,7 +16,9 @@
             sendMessage() {
                 this.$emit('messagesent', {
                     message: this.messageText,
-                    user: "Аноним"
+                    user: {
+                        name: $('.navbar-right .dropdown-toggle').text()
+                    }
                 });
                 this.messageText = '';
             }
